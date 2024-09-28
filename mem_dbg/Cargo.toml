@@ -12,11 +12,11 @@ authors = ["Tommaso Fontana <tommaso.fontana.96@gmail.com>", "Sebastiano Vigna <
 [dependencies]
 mem_dbg-derive =  { version = "=0.1.6", optional = true }
 #mem_dbg-derive =  { path = "../mem_dbg-derive", optional = true }
-mmap-rs = {version="0.6.0", optional=true}
+mmap-rs = {version="0.6.0", optional=true }
 half = { version = "2.0.4", optional = true }
 bitflags = "2.4.1"
-rand = {version = "0.8.5", optional = true, features = ["small_rng"]}
-maligned = {version="0.2.1", optional = true}
+rand = {version = "0.8.5", optional = true, features = ["small_rng"] }
+maligned = {version="0.2.1", optional = true }
 
 [dev-dependencies]
 paste = "1.0.15"
