@@ -312,6 +312,7 @@ fn test_unit() {
 }
 
 #[test]
+#[cfg(feature = "std")]
 fn test_phantom() {
     struct Dummy();
     #[derive(MemSize, MemDbg)]
@@ -323,12 +324,14 @@ fn test_phantom() {
 }
 
 #[test]
+#[cfg(feature = "std")]
 fn test_vec_strings() {
     let data = vec![String::new(), String::new()];
     data.mem_dbg(DbgFlags::default()).unwrap();
 }
 
 #[test]
+#[cfg(feature = "std")]
 fn test_array_u8() {
     let data = [0_u8; 10];
     assert_eq!(data.mem_size(SizeFlags::default()), 10);
@@ -336,6 +339,7 @@ fn test_array_u8() {
 }
 
 #[test]
+#[cfg(feature = "std")]
 fn test_array_empty_struct() {
     #[derive(MemSize, MemDbg, Clone, Copy)]
     struct Dummy;
@@ -379,6 +383,7 @@ fn test_slice_empty_struct() {
 }
 
 #[test]
+#[cfg(feature = "std")]
 fn test_indirect_call() {
     #[derive(MemSize, MemDbg)]
     struct Dummy<T>(Vec<T>);

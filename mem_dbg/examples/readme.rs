@@ -8,8 +8,10 @@
 #![cfg_attr(feature = "offset_of_enum", feature(offset_of_enum, offset_of_nested))]
 #![allow(dead_code)]
 
+#[cfg(feature = "std")]
 use mem_dbg::*;
 
+#[cfg(feature = "std")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     use mem_dbg::*;
 
@@ -73,4 +75,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         s.mem_dbg(DbgFlags::empty() | DbgFlags::RUST_LAYOUT)?;
     }
     Ok(())
+}
+
+#[cfg(not(feature = "std"))]
+fn main() {
+    println!("This example requires the 'std' feature.");
 }

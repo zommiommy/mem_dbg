@@ -8,8 +8,6 @@
 #![cfg_attr(feature = "offset_of_enum", feature(offset_of_enum, offset_of_nested))]
 #![allow(dead_code)]
 
-use std::collections::HashSet;
-
 use mem_dbg::*;
 
 #[derive(Clone, Copy, MemSize, MemDbg)]
@@ -29,11 +27,12 @@ struct TestMarker;
 struct TestTuple(usize, u8);
 
 #[derive(MemSize, MemDbg)]
+#[cfg(feature = "std")]
 struct Struct<A, B> {
     a: A,
     b: B,
     test: isize,
-    h: HashSet<usize>,
+    h: std::collections::HashSet<usize>,
 }
 
 #[derive(MemSize, MemDbg)]
@@ -43,10 +42,11 @@ struct Data<A> {
     c: (u8, String),
 }
 
+#[cfg(feature = "std")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut b = Vec::with_capacity(100);
     b.extend(0..10);
-    let mut h = HashSet::with_capacity(100);
+    let mut h = std::collections::HashSet::with_capacity(100);
     h.extend(0..10);
 
     let s = Struct {
@@ -119,7 +119,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         a: 0_u8,
         b: 0_u8,
         test: 1,
-        h: HashSet::new(),
+        h: std::collections::HashSet::new(),
     };
 
     println!();
@@ -135,4 +135,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     s.mem_dbg(DbgFlags::RUST_LAYOUT)?;
 
     Ok(())
+}
+
+#[cfg(not(feature = "std"))]
+fn main() {
+    println!("This example requires the 'std' feature.");
 }

@@ -11,3 +11,6 @@ deepsize = "0.2.0"
 get-size = "0.1.4"
 size-of = "0.1.5"
 
+[features]
+default = ["std"]
+std = ["mem_dbg/std"]

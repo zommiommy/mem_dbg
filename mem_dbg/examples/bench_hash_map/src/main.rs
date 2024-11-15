@@ -10,6 +10,7 @@ use std::time::Instant;
 #[global_allocator]
 static ALLOCATOR: Cap<alloc::System> = Cap::new(alloc::System, usize::MAX);
 
+#[cfg(feature = "std")]
 fn main() {
     const N: usize = 100_000_000;
     let mut m = HashMap::with_capacity(N);
@@ -34,4 +35,9 @@ fn main() {
     let start = Instant::now();
     let size = m.mem_size(SizeFlags::default());
     println!("mem_size:     {} {:?} ns", size, start.elapsed().as_nanos());
+}
+
+#[cfg(not(feature = "std"))]
+fn main() {
+    println!("This example requires the 'std' feature.");
 }

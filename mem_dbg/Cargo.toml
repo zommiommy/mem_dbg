@@ -10,8 +10,8 @@ keywords = ["allocation", "debug", "memory"]
 authors = ["Tommaso Fontana <tommaso.fontana.96@gmail.com>", "Sebastiano Vigna <sebastiano.vigna@unimi.it>"]
 
 [dependencies]
-mem_dbg-derive =  { version = "=0.1.6", optional = true }
-#mem_dbg-derive =  { path = "../mem_dbg-derive", optional = true }
+#mem_dbg-derive =  { version = "=0.1.6", optional = true }
+mem_dbg-derive =  { path = "../mem_dbg-derive", optional = true }
 mmap-rs = {version="0.6.0", optional=true}
 half = { version = "2.0.4", optional = true }
 bitflags = "2.4.1"
@@ -22,8 +22,8 @@ maligned = {version="0.2.1", optional = true}
 paste = "1.0.15"
 
 [features]
-default = ["std", "derive"]
+default = ["derive", "std"]
 std = ["alloc"]
-derive = ["mem_dbg-derive"]
+derive = ["mem_dbg-derive", "alloc"]
 offset_of_enum = []
 alloc = []
